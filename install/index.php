@@ -996,6 +996,8 @@ $temp_user_id = $pdo->query("
             ('Namecheap', '1', '0', '0', '0', '1', '0', '1', '1', '1', '1', '1', '1', '', '" . $timestamp . "'),
             ('NameSilo', '0', '0', '0', '0', '1', '0', '0', '1', '1', '1', '1', '1', '', '" . $timestamp . "'),
             ('OpenSRS', '1', '0', '0', '0', '1', '0', '1', '1', '1', '1', '1', '1', '', '" . $timestamp . "'),
+            ('EuroDNS', '0', '0', '0', '0', '1', '1', '0', '1', '1', '1', '1', '1', 'Api key is your API username & the API secret is your API password.', '" . $timestamp . "'),
+            ('DirectNIC', '0', '0', '0', '0', '0', '0', '0', '1', '1', '1', '1', '1', 'Data is accessed via CSV. Copy your DirectNIC CSV export to /docs/DirectNIC-Import.csv to import.', '" . $timestamp . "'),
             ('ResellerClub', '0', '0', '1', '0', '1', '0', '0', '0', '1', '1', '1', '0', 'ResellerClub does not currently allow the auto renewal status of a domain to be retrieved using their API, so all domains added to the queue from a ResellerClub account will have their auto renewal status set to No.', '" . $timestamp . "')";
     $result = mysqli_query($dbcon, $sql) or $error->outputSqlError($dbcon, '1', 'ERROR');
 

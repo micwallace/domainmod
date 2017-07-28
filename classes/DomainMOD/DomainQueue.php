@@ -146,6 +146,18 @@ class DomainQueue
                     list($account_username, $api_key) = $this->api->getUserKey($row->account_id);
                     list($domain_count, $domain_list) = $registrar->getDomainList($account_username, $api_key);
 
+                } elseif ($row->api_registrar_name == 'EuroDNS') {
+
+                    $registrar = new EuroDns();
+                    $api_key = $this->api->getUserKey($row->account_id)[1];
+                    $api_secret = $this->api->getUserAppSecret($row->account_id)[2];
+                    list($domain_count, $domain_list) = $registrar->getDomainList($api_key, $api_secret);
+
+                } elseif ($row->api_registrar_name == 'DirectNIC') {
+
+                    $registrar = new DirectNIC();
+                    list($domain_count, $domain_list) = $registrar->getDomainList();
+
                 } else {
 
                     return "Invalid Domain Registrar";
@@ -291,6 +303,18 @@ class DomainQueue
                     $registrar = new ResellerClub();
                     list($reseller_id, $api_key) = $this->api->getReselleridKey($row->account_id);
                     list($expiration_date, $dns_servers, $privacy_status, $autorenew_status) = $registrar->getFullInfo($reseller_id, $api_key, $row->domain);
+
+                } elseif ($row->api_registrar_name == 'EuroDNS') {
+
+                    $registrar = new EuroDns();
+                    $api_key = $this->api->getUserKey($row->account_id)[1];
+                    $api_secret = $this->api->getUserAppSecret($row->account_id)[2];
+                    list($expiration_date, $dns_servers, $privacy_status, $autorenew_status) = $registrar->getFullInfo($api_key, $api_secret, $row->domain);
+
+                } elseif ($row->api_registrar_name == 'DirectNIC') {
+
+                    $registrar = new DirectNIC();
+                    list($expiration_date, $dns_servers, $privacy_status, $autorenew_status) = $registrar->getFullInfo($row->domain);
 
                 } else {
 
